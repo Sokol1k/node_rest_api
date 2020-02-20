@@ -8,8 +8,8 @@ exports.up = function(knex) {
       .unsigned()
       .notNullable()
       .references("roles.id")
-      .onDelete()
-      .onUpdate();
+      .onDelete('cascade')
+      .onUpdate('cascade');
     table.timestamps();
 
     table.unique("email");
