@@ -10,7 +10,7 @@ exports.up = function(knex) {
       .references("roles.id")
       .onDelete('cascade')
       .onUpdate('cascade');
-    table.timestamps();
+    table.timestamps(true, true);
 
     table.unique("email");
   });

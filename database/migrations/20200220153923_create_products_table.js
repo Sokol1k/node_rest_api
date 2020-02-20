@@ -3,7 +3,7 @@ exports.up = function(knex) {
     table.increments();
     table.string("name", 255).notNullable();
     table.decimal("price", 11, 2).notNullable();
-    table.timestamps();
+    table.timestamps(true, true);
 
     table.unique("name");
   });

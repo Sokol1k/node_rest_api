@@ -11,7 +11,7 @@ exports.up = function(knex) {
     table.specificType("status", "tinyint").notNullable().defaultTo(0);
     table.decimal("price", 11, 2).notNullable();
     table.float("discount").nullable();
-    table.timestamps();
+    table.timestamps(true, true);
   });
 };
 
