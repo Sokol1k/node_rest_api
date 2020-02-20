@@ -11,6 +11,7 @@ exports.up = function(knex) {
       .onDelete()
       .onUpdate();
     table.timestamps();
+
     table.unique("email");
   });
 };
