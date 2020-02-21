@@ -1,4 +1,4 @@
-var faker = require("faker");
+const faker = require("faker");
 
 let createRecord = knex => {
   return knex("products").insert({
