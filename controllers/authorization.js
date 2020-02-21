@@ -19,16 +19,11 @@ const login = function(req, res) {
 };
 
 const logout = function(req, res) {
-  var user = req.cookies["user"];
-  if (user) {
-    res.clearCookie("user");
-    return res.send({ message: "User successfully logout." });
-  } else {
-    return res.status(401).send({ message: "User is not logged in." });
-  }
+  res.clearCookie("user");
+  return res.send({ message: "User successfully logout." });
 };
 
 module.exports = {
-    login,
-    logout
-}
+  login,
+  logout
+};

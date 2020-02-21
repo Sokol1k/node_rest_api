@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { rules, middleware} = require('./authorization');
+const checkAuth = require('./check-auth');
+const auth = require('./authorization');
 
-router.post('/login', rules, middleware);
+router.use(checkAuth.middleware);
+router.post('/login', auth.rules, auth.middleware);
 
 module.exports = router;
