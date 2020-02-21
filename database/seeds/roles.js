@@ -3,9 +3,9 @@ exports.seed = function(knex) {
     .del()
     .then(function() {
       return knex("roles").insert([
-        { name: "shop assistant" },
-        { name: "cashier" },
-        { name: "accountant" }
+        { name: "Продавец-консультант" },
+        { name: "Кассир" },
+        { name: "Бухгалтер" }
       ]);
     });
 };

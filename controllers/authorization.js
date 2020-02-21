@@ -2,8 +2,9 @@ const db = require("../database");
 
 const login = function(req, res) {
   db("users")
+    .innerJoin("roles", "users.role_id", "roles.id")
     .where({ email: req.body.email })
-    .select("*")
+    .select("users.id", "users.email", "users.name", "roles.name as role")
     .then(user => {
       if (!user.length) {
         return res

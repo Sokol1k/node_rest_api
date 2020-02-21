@@ -8,7 +8,7 @@ exports.up = function(knex) {
       .references("products.id")
       .onDelete('cascade')
       .onUpdate('cascade');
-    table.specificType("status", "tinyint").notNullable().defaultTo(0);
+    table.string("status").notNullable().defaultTo("в ожидании");
     table.decimal("price", 11, 2).notNullable();
     table.float("discount").nullable();
     table.timestamps(true, true);
