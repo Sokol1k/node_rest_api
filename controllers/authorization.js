@@ -1,10 +1,6 @@
-const express = require("express");
 const db = require("../database");
-const router = express.Router();
 
-// POST route for authorization
-
-router.post("/login", function(req, res) {
+const login = function(req, res) {
   db("users")
     .where({ email: req.body.email })
     .select("*")
@@ -20,11 +16,9 @@ router.post("/login", function(req, res) {
     .catch(error => {
       res.status(500).send(error);
     });
-});
+};
 
-// POST route for deauthorization
-
-router.post("/logout", function(req, res) {
+const logout = function(req, res) {
   var user = req.cookies["user"];
   if (user) {
     res.clearCookie("user");
@@ -32,6 +26,9 @@ router.post("/logout", function(req, res) {
   } else {
     return res.status(401).send({ message: "User is not logged in." });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+    login,
+    logout
+}
