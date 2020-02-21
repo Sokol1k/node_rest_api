@@ -1,6 +1,28 @@
 const db = require("../database");
 const moment = require("moment");
 
+const index = function(req, res) {
+  let orders = db("orders")
+    .innerJoin("products", "orders.product_id", "products.id")
+    .innerJoin("statuses", "orders.status_id", "statuses.id")
+    .select(
+      "products.name",
+      "statuses.name as status",
+      "orders.price",
+      "orders.discount"
+    );
+  if (req.query.status) {
+    orders.where({ status_id: req.query.status });
+  }
+  orders
+    .then(order => {
+      res.send(order);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+};
+
 const store = function(req, res) {
   db("products")
     .where({ id: req.body.product_id })
@@ -40,5 +62,6 @@ const store = function(req, res) {
 };
 
 module.exports = {
+  index,
   store
 };
