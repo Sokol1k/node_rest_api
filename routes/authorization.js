@@ -1,28 +1,6 @@
 const express = require("express");
 const db = require("../database");
-const { check, validationResult } = require("express-validator");
 const router = express.Router();
-
-// POST middleware for data validation for authorization. 
-
-router.post(
-  "/login",
-  [
-    check("email", "Your email is not valid")
-      .not()
-      .isEmpty()
-      .isEmail()
-      .normalizeEmail()
-  ],
-  function(req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).send(errors.array());
-    } else {
-      next();
-    }
-  }
-);
 
 // POST route for authorization
 
