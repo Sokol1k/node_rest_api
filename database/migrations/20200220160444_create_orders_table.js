@@ -6,9 +6,16 @@ exports.up = function(knex) {
       .unsigned()
       .notNullable()
       .references("products.id")
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table.string("status").notNullable().defaultTo("в ожидании");
+      .onDelete("cascade")
+      .onUpdate("cascade");
+    table
+      .integer("status_id")
+      .unsigned()
+      .notNullable()
+      .defaultTo(1)
+      .references("statuses.id")
+      .onDelete("cascade")
+      .onUpdate("cascade");
     table.decimal("price", 11, 2).notNullable();
     table.float("discount").nullable();
     table.timestamps(true, true);

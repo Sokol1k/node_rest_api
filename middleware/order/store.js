@@ -13,7 +13,7 @@ module.exports = {
       return res.status(422).send(errors.array());
     } else {
       var user = req.cookies["user"];
-      if (user.role == "Кассир") {
+      if (user.role_id == 2) {
         next();
       } else {
         return res.status(401).send({

@@ -4,7 +4,7 @@ const login = function(req, res) {
   db("users")
     .innerJoin("roles", "users.role_id", "roles.id")
     .where({ email: req.body.email })
-    .select("users.id", "users.email", "users.name", "roles.name as role")
+    .select("users.id", "users.email", "users.name", "users.role_id", "roles.name as role")
     .then(user => {
       if (!user.length) {
         return res
