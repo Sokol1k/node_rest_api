@@ -3,6 +3,8 @@ const db = require("../database");
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
 
+// POST middleware for data validation for authorization. 
+
 router.post(
   "/login",
   [
@@ -12,28 +14,37 @@ router.post(
       .isEmail()
       .normalizeEmail()
   ],
-  function(req, res) {
+  function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).send(errors.array());
+    } else {
+      next();
     }
-    db("users")
-      .where({ email: req.body.email })
-      .select("*")
-      .then(user => {
-        if (!user.length) {
-          return res
-            .status(400)
-            .send({ message: "Incorrect login information entered." });
-        }
-        res.cookie("user", user[0], { maxAge: 24 * 60 * 60 * 1000 });
-        res.send(user[0]);
-      })
-      .catch(error => {
-        res.status(500).send(error);
-      });
   }
 );
+
+// POST route for authorization
+
+router.post("/login", function(req, res) {
+  db("users")
+    .where({ email: req.body.email })
+    .select("*")
+    .then(user => {
+      if (!user.length) {
+        return res
+          .status(400)
+          .send({ message: "Incorrect login information entered." });
+      }
+      res.cookie("user", user[0], { maxAge: 24 * 60 * 60 * 1000 });
+      res.send(user[0]);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+});
+
+// POST route for deauthorization
 
 router.post("/logout", function(req, res) {
   var user = req.cookies["user"];
