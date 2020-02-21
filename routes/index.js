@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { login, logout } = require('../controllers/authorization');
-
-// POST route for authorization
+const order = require('../controllers/order');
 
 router.post("/login", login);
-
-// POST route for deauthorization
-
 router.post("/logout", logout);
+router.post('/order', order.store);
 
 module.exports = router;
