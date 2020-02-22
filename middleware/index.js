@@ -10,9 +10,9 @@ const checkStore = require('./check/store');
 
 router.use(checkAuth.middleware);
 router.post('/login', auth.rules, auth.middleware);
-router.get('/order', orderIndex.rules, orderIndex.middleware);
-router.post('/order', orderStore.rules, orderStore.middleware);
-router.put('/order/:id', orderUpdate.rules, orderUpdate.middleware);
-router.post('/check', checkStore.middleware);
+router.get('/orders', orderIndex.rules, orderIndex.middleware);
+router.post('/orders', orderStore.rules, orderStore.middleware);
+router.put('/orders/:id', orderUpdate.rules, orderUpdate.middleware);
+router.post('/checks', checkStore.middleware);
 
 module.exports = router;

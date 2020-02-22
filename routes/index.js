@@ -6,9 +6,9 @@ const check = require('../controllers/check');
 
 router.post("/login", login);
 router.post("/logout", logout);
-router.get('/order', order.index);
-router.post('/order', order.store);
-router.put('/order/:id', order.update);
-router.post('/check', check.store);
+router.get('/orders', order.index);
+router.post('/orders', order.store);
+router.put('/orders/:id', order.update);
+router.post('/checks', check.store);
 
 module.exports = router;
