@@ -16,7 +16,10 @@ const index = function(req, res) {
     orders.where({ status_id: req.query.status });
   }
   if (req.query.from && req.query.to) {
-    orders.whereBetween(db.raw("DATE(orders.created_at)"), [req.query.from, req.query.to]);
+    orders.whereBetween(db.raw("DATE(orders.created_at)"), [
+      req.query.from,
+      req.query.to
+    ]);
   }
   orders
     .then(order => {
@@ -65,7 +68,28 @@ const store = function(req, res) {
     });
 };
 
+const update = function(req, res) {
+  db("orders")
+    .where({ id: req.params.id })
+    .update({ status_id: req.query.status })
+    .then(order => {
+      db("orders")
+        .select("*")
+        .where({ id: req.params.id })
+        .then(order => {
+          res.send(order[0]);
+        })
+        .catch(error => {
+          res.status(500).send(error);
+        });
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+};
+
 module.exports = {
   index,
-  store
+  store,
+  update
 };
