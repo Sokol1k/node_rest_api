@@ -9,10 +9,14 @@ const index = function(req, res) {
       "products.name",
       "statuses.name as status",
       "orders.price",
-      "orders.discount"
+      "orders.discount",
+      "orders.created_at"
     );
   if (req.query.status) {
     orders.where({ status_id: req.query.status });
+  }
+  if (req.query.from && req.query.to) {
+    orders.whereBetween(db.raw("DATE(orders.created_at)"), [req.query.from, req.query.to]);
   }
   orders
     .then(order => {
