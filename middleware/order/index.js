@@ -23,8 +23,8 @@ module.exports = {
       return res.status(422).send({ message: "Date from greater than to." });
     } 
     else {
-      var user = req.cookies["user"];
-      if (user.role_id == 2 || user.role_id == 3) {
+      var role = req.cookies["role"];
+      if (role == 2 || role == 3) {
         next();
       } else {
         return res.status(401).send({

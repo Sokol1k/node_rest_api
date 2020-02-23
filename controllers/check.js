@@ -18,7 +18,7 @@ const store = function(req, res) {
             .where({ id: check })
             .select("*")
             .then(check => {
-              res.send(check[0]);
+              res.status(201).send(check[0]);
             })
             .catch(error => {
               res.status(500).send(error);

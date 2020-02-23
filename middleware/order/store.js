@@ -12,8 +12,8 @@ module.exports = {
     if (!errors.isEmpty()) {
       return res.status(422).send(errors.array());
     } else {
-      var user = req.cookies["user"];
-      if (user.role_id == 1) {
+      var role = req.cookies["role"];
+      if (role == 1) {
         next();
       } else {
         return res.status(401).send({

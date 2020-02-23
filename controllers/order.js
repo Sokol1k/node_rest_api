@@ -53,7 +53,7 @@ const store = function(req, res) {
             .where({ id: order })
             .select("*")
             .then(order => {
-              res.send(order[0]);
+              res.status(201).send(order[0]);
             })
             .catch(error => {
               res.status(500).send(error);
@@ -71,7 +71,7 @@ const store = function(req, res) {
 const update = function(req, res) {
   db("orders")
     .where({ id: req.params.id })
-    .update({ status_id: req.query.status })
+    .update({ status_id: req.body.status })
     .then(order => {
       db("orders")
         .select("*")

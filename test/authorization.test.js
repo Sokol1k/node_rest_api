@@ -2,7 +2,7 @@ const request = require("supertest");
 
 var app = require("../app");
 
-it("Successful authorization", function(done) {
+it("authorization.login: Successful authorization", function(done) {
   request(app)
     .post("/api/login")
     .send("email=shop-assistant@gamil.com")
@@ -10,7 +10,7 @@ it("Successful authorization", function(done) {
     .end(done);
 });
 
-it("User does not exist", function(done) {
+it("authorization.login: User does not exist", function(done) {
   request(app)
     .post("/api/login")
     .send("email=shop-assistant@gamil.co")
@@ -18,7 +18,7 @@ it("User does not exist", function(done) {
     .end(done);
 });
 
-it("Invalid data", function(done) {
+it("authorization.login: Invalid data", function(done) {
   request(app)
     .post("/api/login")
     .send("email=shop-assistantgamil.com")
@@ -26,7 +26,7 @@ it("Invalid data", function(done) {
     .end(done);
 });
 
-it("Successful logout", function(done) {
+it("authorization.logout: Successful logout", function(done) {
   request(app)
     .post("/api/logout")
     .set('Cookie', 'user=user')
@@ -34,7 +34,7 @@ it("Successful logout", function(done) {
     .end(done);
 });
 
-it("User not authorized", function(done) {
+it("authorization.logout: User not authorized", function(done) {
   request(app)
     .post("/api/logout")
     .expect(401)
