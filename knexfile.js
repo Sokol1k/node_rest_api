@@ -15,6 +15,20 @@ module.exports = {
       directory: __dirname + process.env.DEV_PATH_SEEDS
     }
   },
+  test: {
+    client: process.env.TEST_CLINET_DB,
+    connection: {
+      database: process.env.TEST_DATABASE_DB,
+      user: process.env.TEST_USERNAME_DB,
+      password: process.env.TEST_PASSWORD_DB
+    },
+    migrations: {
+      directory: __dirname + process.env.TEST_PATH_MIGRATIONS
+    },
+    seeds: {
+      directory: __dirname + process.env.TEST_PATH_SEEDS
+    }
+  },
   production: {
     client: process.env.PROD_CLINET_DB,
     connection: {
