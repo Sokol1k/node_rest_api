@@ -33,6 +33,19 @@ const store = function(req, res) {
     });
 };
 
+const show = function(req, res) {
+  db("checks")
+    .where({ id: req.params.id })
+    .select("*")
+    .then(check => {
+      res.send(check[0]);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+};
+
 module.exports = {
-  store
+  store,
+  show
 };

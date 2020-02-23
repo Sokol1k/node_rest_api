@@ -10,5 +10,6 @@ router.get('/orders', order.index);
 router.post('/orders', order.store);
 router.put('/orders/:id', order.update);
 router.post('/checks', check.store);
+router.get('/checks/:id', check.show);
 
 module.exports = router;
