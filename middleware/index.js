@@ -13,6 +13,6 @@ router.post('/login', auth.rules, auth.middleware);
 router.get('/orders', orderIndex.rules, orderIndex.middleware);
 router.post('/orders', orderStore.rules, orderStore.middleware);
 router.put('/orders/:id', orderUpdate.rules, orderUpdate.middleware);
-router.post('/checks', checkStore.middleware);
+router.post('/checks', checkStore.rules, checkStore.middleware);
 
 module.exports = router;
