@@ -1,11 +1,11 @@
 const request = require("supertest");
 
-var app = require("../app");
+const app = require("../app");
 
 it("order.index: Get orders", function(done) {
   request(app)
     .get("/api/orders")
-    .set("Cookie", ["user=2", "role=2"])
+    .set("Cookie", ["user=1", "role=1"])
     .expect(200)
     .end(done);
 });
@@ -13,7 +13,7 @@ it("order.index: Get orders", function(done) {
 it("order.index: User does not have permission to use this method", function(done) {
   request(app)
     .get("/api/orders")
-    .set("Cookie", ["user=2", "role=1"])
+    .set("Cookie", ["user=2", "role=2"])
     .expect(401)
     .end(done);
 });
@@ -39,7 +39,7 @@ it("order.store: Create orders", function(done) {
   request(app)
     .post("/api/orders")
     .send({ product_id: 1 })
-    .set("Cookie", ["user=1", "role=1"])
+    .set("Cookie", ["user=2", "role=2"])
     .expect(201)
     .end(done);
 });
@@ -48,7 +48,7 @@ it("order.store: User does not have permission to use this method", function(don
   request(app)
     .post("/api/orders")
     .send({ product_id: 1 })
-    .set("Cookie", ["user=2", "role=2"])
+    .set("Cookie", ["user=1", "role=1"])
     .expect(401)
     .end(done);
 });
@@ -83,7 +83,7 @@ it("order.update: User does not have permission to use this method", function(do
   request(app)
     .put("/api/orders/1")
     .send({ status: 1 })
-    .set("Cookie", ["user=2", "role=1"])
+    .set("Cookie", ["user=3", "role=3"])
     .expect(401)
     .end(done);
 });

@@ -1,6 +1,6 @@
 const request = require("supertest");
 
-var app = require("../app");
+const app = require("../app");
 
 it("check.store: Create check", function(done) {
   request(app)

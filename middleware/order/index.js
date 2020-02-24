@@ -24,7 +24,7 @@ module.exports = {
     } 
     else {
       var role = req.cookies["role"];
-      if (role == 2 || role == 3) {
+      if (role == 1 || role == 3) {
         next();
       } else {
         return res.status(401).send({

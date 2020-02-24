@@ -13,7 +13,7 @@ module.exports = {
       return res.status(422).send(errors.array());
     } else {
       var role = req.cookies["role"];
-      if (role == 1) {
+      if (role == 2) {
         next();
       } else {
         return res.status(401).send({

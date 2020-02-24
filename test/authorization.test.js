@@ -1,6 +1,6 @@
 const request = require("supertest");
 
-var app = require("../app");
+const app = require("../app");
 
 it("authorization.login: Successful authorization", function(done) {
   request(app)

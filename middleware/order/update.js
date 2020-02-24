@@ -14,7 +14,7 @@ module.exports = {
       return res.status(422).send({ message: "Incorrect status entered." });
     } else {
       var role = req.cookies["role"];
-      if (role == 2) {
+      if (role == 1 || role == 2) {
         next();
       } else {
         return res.status(401).send({
