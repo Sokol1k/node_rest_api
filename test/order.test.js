@@ -79,6 +79,15 @@ it("order.update: Update orders", function(done) {
     .end(done);
 });
 
+it("order.update: Update orders", function(done) {
+  request(app)
+    .put("/api/orders/100")
+    .send({ status: 1 })
+    .set("Cookie", ["user=2", "role=2"])
+    .expect(204)
+    .end(done);
+});
+
 it("order.update: User does not have permission to use this method", function(done) {
   request(app)
     .put("/api/orders/1")

@@ -38,7 +38,11 @@ const show = function(req, res) {
     .where({ id: req.params.id })
     .select("*")
     .then(check => {
-      res.send(check[0]);
+      if (check.length) {
+        res.send(check[0]);
+      } else {
+        res.status(204).send(check[0]);
+      }
     })
     .catch(error => {
       res.status(500).send(error);

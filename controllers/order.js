@@ -73,15 +73,19 @@ const update = function(req, res) {
     .where({ id: req.params.id })
     .update({ status_id: req.body.status })
     .then(order => {
-      db("orders")
-        .select("*")
-        .where({ id: req.params.id })
-        .then(order => {
-          res.send(order[0]);
-        })
-        .catch(error => {
-          res.status(500).send(error);
-        });
+      if (order) {
+        db("orders")
+          .select("*")
+          .where({ id: req.params.id })
+          .then(order => {
+            res.send(order[0]);
+          })
+          .catch(error => {
+            res.status(500).send(error);
+          });
+      } else {
+        res.status(204).send(order[0]);
+      }
     })
     .catch(error => {
       res.status(500).send(error);

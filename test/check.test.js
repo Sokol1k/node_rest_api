@@ -46,6 +46,14 @@ it("check.show: Get check", function(done) {
     .end(done);
 });
 
+it("check.show: Not data", function(done) {
+  request(app)
+    .get("/api/checks/100")
+    .set("Cookie", ["user=2", "role=2"])
+    .expect(204)
+    .end(done);
+});
+
 it("check.show: User does not have permission to use this method", function(done) {
   request(app)
     .get("/api/checks/1")
