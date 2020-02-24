@@ -9,6 +9,7 @@ router.get('/orders', order.index);
 router.get('/orders/:id', order.show);
 router.post('/orders', order.store);
 router.put('/orders/:id', order.update);
+router.delete('/orders/:id', order.destroy);
 router.post('/checks', check.store);
 router.get('/checks/:id', check.show);
 

@@ -108,9 +108,26 @@ const update = function(req, res) {
     });
 };
 
+const destroy = function(req, res) {
+  db("orders")
+    .where({ id: req.params.id })
+    .delete()
+    .then(order => {
+      if (order) {
+        res.send({message: "Order has been deleted."});
+      } else {
+        res.status(204).send(order[0]);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+};
+
 module.exports = {
   index,
   show,
   store,
-  update
+  update,
+  destroy
 };
