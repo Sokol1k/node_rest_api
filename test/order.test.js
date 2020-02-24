@@ -43,6 +43,35 @@ createToken("shop-assistant@gamil.com").then(token => {
   });
 });
 
+createToken("shop-assistant@gamil.com").then(token => {
+  it("order.show: Show order", function(done) {
+    request(app)
+      .get("/api/orders/1")
+      .set("Authorization", "bearer " + token)
+      .expect(200)
+      .end(done);
+  });
+});
+
+createToken("cashier@gamil.com").then(token => {
+  it("order.show: User does not have permission to use this method", function(done) {
+    request(app)
+      .get("/api/orders/1")
+      .set("Authorization", "bearer " + token)
+      .expect(403)
+      .end(done);
+  });
+});
+
+createToken("cashier@gamil.com").then(token => {
+  it("order.show: User not authorized", function(done) {
+    request(app)
+      .get("/api/orders/1")
+      .expect(403)
+      .end(done);
+  });
+});
+
 createToken("cashier@gamil.com").then(token => {
   it("order.store: Create orders", function(done) {
     request(app)
