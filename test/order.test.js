@@ -53,6 +53,16 @@ createToken("shop-assistant@gamil.com").then(token => {
   });
 });
 
+createToken("shop-assistant@gamil.com").then(token => {
+  it("order.show: Not data", function(done) {
+    request(app)
+      .get("/api/orders/100")
+      .set("Authorization", "bearer " + token)
+      .expect(204)
+      .end(done);
+  });
+});
+
 createToken("cashier@gamil.com").then(token => {
   it("order.show: User does not have permission to use this method", function(done) {
     request(app)
@@ -161,6 +171,45 @@ createToken("cashier@gamil.com").then(token => {
       .send({ status: 0 })
       .set("Authorization", "bearer " + token)
       .expect(422)
+      .end(done);
+  });
+});
+
+createToken("shop-assistant@gamil.com").then(token => {
+  it("order.destroy: Destroy order", function(done) {
+    request(app)
+      .delete("/api/orders/1")
+      .set("Authorization", "bearer " + token)
+      .expect(200)
+      .end(done);
+  });
+});
+
+createToken("shop-assistant@gamil.com").then(token => {
+  it("order.destroy: Not data", function(done) {
+    request(app)
+      .delete("/api/orders/100")
+      .set("Authorization", "bearer " + token)
+      .expect(204)
+      .end(done);
+  });
+});
+
+createToken("cashier@gamil.com").then(token => {
+  it("order.destroy: User does not have permission to use this method", function(done) {
+    request(app)
+      .delete("/api/orders/1")
+      .set("Authorization", "bearer " + token)
+      .expect(403)
+      .end(done);
+  });
+});
+
+createToken("cashier@gamil.com").then(token => {
+  it("order.destroy: User not authorized", function(done) {
+    request(app)
+      .delete("/api/orders/1")
+      .expect(403)
       .end(done);
   });
 });
