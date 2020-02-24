@@ -14,7 +14,7 @@ it("order.index: User does not have permission to use this method", function(don
   request(app)
     .get("/api/orders")
     .set("Cookie", ["user=2", "role=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -22,7 +22,7 @@ it("order.index: User not authorized", function(done) {
   request(app)
     .get("/api/orders")
     .set("Cookie", ["role=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -49,7 +49,7 @@ it("order.store: User does not have permission to use this method", function(don
     .post("/api/orders")
     .send({ product_id: 1 })
     .set("Cookie", ["user=1", "role=1"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -57,7 +57,7 @@ it("order.store: User not authorized", function(done) {
   request(app)
     .post("/api/orders")
     .set("Cookie", ["role=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -93,7 +93,7 @@ it("order.update: User does not have permission to use this method", function(do
     .put("/api/orders/1")
     .send({ status: 1 })
     .set("Cookie", ["user=3", "role=3"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -101,7 +101,7 @@ it("order.update: User not authorized", function(done) {
   request(app)
     .put("/api/orders/1")
     .set("Cookie", ["role=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 

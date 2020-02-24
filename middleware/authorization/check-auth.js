@@ -3,11 +3,14 @@ module.exports = {
     if (req.path == "/login") {
       next();
     } else {
-      var user = req.cookies["user"];
-      if (user) {
+      const bearerHeader = req.headers['authorization'];
+      if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        req.token = bearerToken
         next();
       } else {
-        return res.status(401).send({ message: "User is not logged in." });
+        return res.status(403).send({ message: "User is not logged in." });
       }
     }
   }

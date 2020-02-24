@@ -16,7 +16,7 @@ it("check.store: User does not have permission to use this method", function(don
     .post("/api/checks")
     .send({ order_id: 1 })
     .set("Cookie", ["role=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -25,7 +25,7 @@ it("check.store: User not authorized", function(done) {
     .post("/api/checks")
     .send({ order_id: 1 })
     .set("Cookie", ["user=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -58,7 +58,7 @@ it("check.show: User does not have permission to use this method", function(done
   request(app)
     .get("/api/checks/1")
     .set("Cookie", ["user=2", "role=1"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });
 
@@ -66,6 +66,6 @@ it("check.show: User not authorized", function(done) {
   request(app)
     .get("/api/checks/1")
     .set("Cookie", ["role=2"])
-    .expect(401)
+    .expect(403)
     .end(done);
 });

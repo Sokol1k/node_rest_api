@@ -1,5 +1,6 @@
 const { check, validationResult } = require("express-validator");
 const moment = require("moment");
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   rules: [
@@ -23,11 +24,11 @@ module.exports = {
       return res.status(422).send({ message: "Date from greater than to." });
     } 
     else {
-      var role = req.cookies["role"];
+      let role = jwt.decode(req.token).user.role_id;
       if (role == 1 || role == 3) {
         next();
       } else {
-        return res.status(401).send({
+        return res.status(403).send({
           message: "User does not have permission to use this method."
         });
       }

@@ -1,4 +1,5 @@
 const { check, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   rules: [
@@ -13,11 +14,11 @@ module.exports = {
     } else if (req.body.status < 1 || req.body.status > 3) {
       return res.status(422).send({ message: "Incorrect status entered." });
     } else {
-      var role = req.cookies["role"];
+      let role = jwt.decode(req.token).user.role_id;
       if (role == 1 || role == 2) {
         next();
       } else {
-        return res.status(401).send({
+        return res.status(403).send({
           message: "User does not have permission to use this method."
         });
       }
