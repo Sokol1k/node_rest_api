@@ -30,6 +30,22 @@ const index = function(req, res) {
     });
 };
 
+const show = function(req, res) {
+  db("orders")
+    .where({ id: req.params.id })
+    .select("*")
+    .then(order => {
+      if (order.length) {
+        res.send(order[0]);
+      } else {
+        res.status(204).send(order[0]);
+      }
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+};
+
 const store = function(req, res) {
   db("products")
     .where({ id: req.body.product_id })
@@ -94,6 +110,7 @@ const update = function(req, res) {
 
 module.exports = {
   index,
+  show,
   store,
   update
 };

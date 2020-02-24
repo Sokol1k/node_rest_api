@@ -6,6 +6,7 @@ const check = require('../controllers/check');
 
 router.post("/login", authorization.login);
 router.get('/orders', order.index);
+router.get('/orders/:id', order.show);
 router.post('/orders', order.store);
 router.put('/orders/:id', order.update);
 router.post('/checks', check.store);
