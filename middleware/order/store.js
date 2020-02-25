@@ -2,6 +2,7 @@ const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
+  // validation rules
   rules: [
     check("product_id", "Product id is not valid")
       .not()
@@ -9,10 +10,13 @@ module.exports = {
       .isNumeric()
   ],
   middleware: function(req, res, next) {
+    // get validation errors
     const errors = validationResult(req);
+    // errors exists or not?
     if (!errors.isEmpty()) {
       return res.status(422).send(errors.array());
     } else {
+      // get user role
       let role = jwt.decode(req.token).user.role_id;
       if (role == 2) {
         next();

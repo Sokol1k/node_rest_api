@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   middleware: function(req, res, next) {
+    // get user role
     let role = jwt.decode(req.token).user.role_id;
     if (role == 2) {
       next();
