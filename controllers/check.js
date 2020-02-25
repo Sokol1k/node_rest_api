@@ -11,22 +11,15 @@ const store = function(req, res) {
         order_price: order[0].price,
         order_created_at: order[0].created_at
       };
-      db("checks")
-        .insert(data)
-        .then(check => {
-          db("checks")
-            .where({ id: check })
-            .select("*")
-            .then(check => {
-              res.status(201).send(check[0]);
-            })
-            .catch(error => {
-              res.status(500).send(error);
-            });
-        })
-        .catch(error => {
-          res.status(500).send(error);
-        });
+      return db("checks").insert(data);
+    })
+    .then(check => {
+      return db("checks")
+        .where({ id: check })
+        .select("*");
+    })
+    .then(check => {
+      res.status(201).send(check[0]);
     })
     .catch(error => {
       res.status(500).send(error);

@@ -4,7 +4,7 @@ let createRecord = knex => {
   return knex("products").insert({
     name: faker.lorem.words(),
     price: faker.random.number(),
-    created_at: faker.date.between('2020-01-01', '2020-02-26')
+    created_at: faker.date.between("2020-01-01", "2020-02-26")
   });
 };
 

@@ -1,6 +1,6 @@
 const { check, validationResult } = require("express-validator");
 const moment = require("moment");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   rules: [
@@ -20,10 +20,9 @@ module.exports = {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).send(errors.array());
-    } else if(moment(req.query.from).isAfter(moment(req.query.to))) {
+    } else if (moment(req.query.from).isAfter(moment(req.query.to))) {
       return res.status(422).send({ message: "Date from greater than to." });
-    } 
-    else {
+    } else {
       let role = jwt.decode(req.token).user.role_id;
       if (role == 1 || role == 3) {
         next();

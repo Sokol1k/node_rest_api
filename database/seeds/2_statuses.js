@@ -5,7 +5,7 @@ exports.seed = function(knex) {
       return knex("statuses").insert([
         { name: "в ожидании" },
         { name: "выполнено" },
-        { name: "оплачено" },
+        { name: "оплачено" }
       ]);
     });
 };

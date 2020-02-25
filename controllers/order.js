@@ -62,22 +62,15 @@ const store = function(req, res) {
       } else {
         data.price = product[0].price;
       }
-      db("orders")
-        .insert(data)
-        .then(order => {
-          db("orders")
-            .where({ id: order })
-            .select("*")
-            .then(order => {
-              res.status(201).send(order[0]);
-            })
-            .catch(error => {
-              res.status(500).send(error);
-            });
-        })
-        .catch(error => {
-          res.status(500).send(error);
-        });
+      return db("orders").insert(data);
+    })
+    .then(order => {
+      return db("orders")
+        .where({ id: order })
+        .select("*");
+    })
+    .then(order => {
+      res.status(201).send(order[0]);
     })
     .catch(error => {
       res.status(500).send(error);
@@ -90,18 +83,15 @@ const update = function(req, res) {
     .update({ status_id: req.body.status })
     .then(order => {
       if (order) {
-        db("orders")
+        return db("orders")
           .select("*")
-          .where({ id: req.params.id })
-          .then(order => {
-            res.send(order[0]);
-          })
-          .catch(error => {
-            res.status(500).send(error);
-          });
+          .where({ id: req.params.id });
       } else {
         res.status(204).send(order[0]);
       }
+    })
+    .then(order => {
+      res.send(order[0]);
     })
     .catch(error => {
       res.status(500).send(error);
@@ -114,7 +104,7 @@ const destroy = function(req, res) {
     .delete()
     .then(order => {
       if (order) {
-        res.send({message: "Order has been deleted."});
+        res.send({ message: "Order has been deleted." });
       } else {
         res.status(204).send(order[0]);
       }

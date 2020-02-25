@@ -3,7 +3,10 @@ exports.up = function(knex) {
     table.increments();
     table.string("name", 255).notNullable();
     table.decimal("price", 11, 2).notNullable();
-    table.float("discount").nullable().defaultTo(20);
+    table
+      .float("discount")
+      .nullable()
+      .defaultTo(20);
     table.timestamps(true, true);
 
     table.unique("name");

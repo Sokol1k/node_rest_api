@@ -4,7 +4,10 @@ exports.up = function(knex) {
     table.string("product_name", 255).notNullable();
     table.decimal("order_price", 11, 2).notNullable();
     table.timestamp("order_created_at").notNullable();
-    table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
+    table
+      .timestamp("created_at")
+      .notNullable()
+      .defaultTo(knex.fn.now());
   });
 };
 

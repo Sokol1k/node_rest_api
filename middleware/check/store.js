@@ -1,5 +1,5 @@
 const { check, validationResult } = require("express-validator");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   rules: [
