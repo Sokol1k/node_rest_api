@@ -23,6 +23,8 @@ module.exports = {
     // errors exists or not?
     if (!errors.isEmpty()) {
       return res.status(422).send(errors.array());
+    } else if (req.query.status < 1 || req.query.status > 3) {
+      return res.status(422).send({ message: "Incorrect status entered." });
     }
     // date from more than to?
     else if (moment(req.query.from).isAfter(moment(req.query.to))) {

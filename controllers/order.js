@@ -121,7 +121,7 @@ const update = function(req, res) {
         // take the just updated record from the database
         return db("orders")
           .select("*")
-          .where({ id: order });
+          .where({ id: req.params.id });
       } else {
         return order;
       }

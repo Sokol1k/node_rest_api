@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"shop-assistant@gamil.com\"\n}",
+					"raw": "{\n\t\"email\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -45,12 +45,22 @@
 			"response": []
 		},
 		{
-			"name": "Logout",
+			"name": "Order index",
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:3000/api/logout",
+					"raw": "http://127.0.0.1:3000/api/orders?",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -61,15 +71,76 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"logout"
+						"orders"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2020-02-24",
+							"disabled": true
+						},
+						{
+							"key": "to",
+							"value": "2020-02-25",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "1",
+							"disabled": true
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Order Store",
+			"name": "Order show",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/orders/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -81,7 +152,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"product_id\": 1\n}",
+					"raw": "{\n\t\"product_id\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,46 +178,18 @@
 			"response": []
 		},
 		{
-			"name": "Order Index",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:3000/api/orders?from=2020-02-20&to=2020-02-23",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"orders"
-					],
-					"query": [
-						{
-							"key": "from",
-							"value": "2020-02-20"
-						},
-						{
-							"key": "to",
-							"value": "2020-02-23"
-						},
-						{
-							"key": "status",
-							"value": "1",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Order update",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
@@ -158,7 +201,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"status\": 2\n}",
+					"raw": "{\n\t\"status\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -185,8 +228,52 @@
 			"response": []
 		},
 		{
+			"name": "Order delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/orders/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Check store",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -198,7 +285,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"order_id\": 1\n}",
+					"raw": "{\n\t\"order_id\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -226,6 +313,16 @@
 		{
 			"name": "Check show",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [
 					{
